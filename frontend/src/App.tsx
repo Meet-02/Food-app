@@ -17,7 +17,7 @@ export default function App() {
   const [editingId, setEditingId] = useState<number | null>(null);
   const [statusMessage, setStatusMessage] = useState("");
 
-  const API_URL = "http://localhost:5000/api/fooditem";
+  const API_URL = "https://food-manager-api-xyz.onrender.com/api/fooditem";
 
   // Load all items when component mounts
   useEffect(() => {
