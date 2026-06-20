@@ -7,19 +7,24 @@ app.use(cors());
 const hostname = '127.0.0.1';
 const port = 5000;
 app.use(express.json()); 
-const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+const db = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT || 3306,
+  ssl: {
+    rejectUnauthorized: true 
+  }
 });
 
-db.connect((err) => {
-    if (err) {
-        console.error('Error connecting to the database:', err.message);
-        return;
-    }
-    console.log('✅ Successfully connected to MySQL database!');
+db.getConnection((err, connection) => {
+  if (err) {
+    console.error("Database connection failed:", err.message);
+    return;
+  }
+  console.log("Successfully connected to TiDB Cloud! 🚀");
+  connection.release();
 });
 
 app.post('/api/fooditem', (req, res) => {
