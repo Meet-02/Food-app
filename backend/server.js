@@ -3,7 +3,9 @@ const cors = require('cors');
 const express = require('express');
 const mysql = require('mysql2');
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://food-app-ivory-delta.vercel.app" 
+}));
 const hostname = '127.0.0.1';
 const port = 5000;
 app.use(express.json()); 
