@@ -143,6 +143,8 @@ app.get('/api/fooditem', (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`🚀 Server running at http://localhost:${port}/`);
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
